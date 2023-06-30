@@ -1,0 +1,39 @@
+" ~~ SEARCH ~~
+set nocompatible           " disable compatibility to old-time vi
+set showmatch              " show matching
+set ignorecase             " case insensitive
+set hlsearch               " highlight search
+set incsearch              " incremental search
+
+" ~~ TAB ~~
+set tabstop=2              " number of columns occupied by a tab
+set softtabstop=2          " see multiple spaces as tabstop so <BS> does the right thing
+set expandtab              " converts tabs to white space
+
+" ~~ INDENT ~~
+set shiftwidth=2           " width for autoindents
+set autoindent             " indent a new line the same amount as the line just typed
+filetype plugin indent on  " allow auto-indenting depending on file type
+
+" ~~ LAYOUT ~~
+set number                 " add line numbers
+set relativenumber
+set wildmode=longest,list  " get bash-like tab completions
+set cc=80                  " set an 80 column border for good coding style
+set cursorline             " highlight current cursorline
+set splitright             " splitting a window will put the new window right of the current one.
+
+" ~~ MOUSE ~~
+" set mouse=v              " middle-click paste with
+set mouse+=a               " enable mouse click
+
+" ~~ CLIPBOARD ~~
+" set clipboard=unnameplus " using system clipboard
+
+" ~~ MISC ~~
+set ttyfast                " speed up scrolling in nvim
+" set spell                " enable spell check (may need to download language
+" set noswapfile           " disable creating swap file
+
+syntax on
+
