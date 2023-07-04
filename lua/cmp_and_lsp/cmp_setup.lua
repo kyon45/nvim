@@ -57,7 +57,7 @@ cmp.setup {
       end
     end),
   }),
-  formmating = {
+  formatting = {
     fields = { 'kind', 'abbr', 'menu' },
     format = function(entry, vim_item)
       -- Kind icons
@@ -67,6 +67,7 @@ cmp.setup {
         buffer = "[Buffer]",
         path = "[Path]",
       })[entry.source.name]
+      return vim_item
     end,
   },
   sources = {
