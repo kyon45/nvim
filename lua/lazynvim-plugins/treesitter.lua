@@ -10,6 +10,7 @@ local ensure_installed = {
   'jsonc', -- JSON with comments
   'html',
   -- Other
+  'vim',
   'python',
   'rust',
   'bash',
@@ -32,9 +33,9 @@ return {
           enable = true,
           additional_vim_regex_highlighting = false,
         },
-        autopairs = {
-          enable = true,
-        },
+        -- autopairs = {
+        --   enable = true,
+        -- },
         indent = {
           enable = true,
         },
