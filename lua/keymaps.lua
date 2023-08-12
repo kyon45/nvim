@@ -22,3 +22,6 @@ vim.keymap.set('n', '<C-Right>', ':vertical +2<CR>', opts)
 vim.keymap.set('v', '<', '<gv', opts)
 vim.keymap.set('v', '>', '>gv', opts)
 
+-- <LEADER> KEY ---------------------------------------------------------------
+vim.g.mapleader = " "
+
