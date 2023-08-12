@@ -1,0 +1,31 @@
+{
+    "workspace.library": [
+        "/Users/bytedance/.config/nvim",
+        "/Users/bytedance/.local/share/nvim/lazy/lazy.nvim",
+        "/Users/bytedance/.local/share/nvim/lazy/cmp-path",
+        "/Users/bytedance/.local/share/nvim/lazy/lualine.nvim",
+        "/Users/bytedance/.local/share/nvim/lazy/nvim-tree.lua",
+        "/Users/bytedance/.local/share/nvim/lazy/cmp-buffer",
+        "/Users/bytedance/.local/share/nvim/lazy/nvim-cmp",
+        "/Users/bytedance/.local/share/nvim/lazy/mason-lspconfig.nvim",
+        "/Users/bytedance/.local/share/nvim/lazy/nvim-lspconfig",
+        "/Users/bytedance/.local/share/nvim/lazy/nvim-web-devicons",
+        "/Users/bytedance/.local/share/nvim/lazy/gitsigns.nvim",
+        "/Users/bytedance/.local/share/nvim/lazy/barbar.nvim",
+        "/Users/bytedance/.local/share/nvim/lazy/vim-illuminate",
+        "/Users/bytedance/.local/share/nvim/lazy/cmp-cmdline",
+        "/Users/bytedance/.local/share/nvim/lazy/cmp-nvim-lsp",
+        "/Users/bytedance/.local/share/nvim/lazy/mason.nvim",
+        "/Users/bytedance/.local/share/nvim/lazy/vscode.nvim",
+        "/opt/homebrew/Cellar/neovim/0.9.1/share/nvim/runtime",
+        "/opt/homebrew/Cellar/neovim/0.9.1/share/nvim/runtime/pack/dist/opt/matchit",
+        "/opt/homebrew/Cellar/neovim/0.9.1/lib/nvim",
+        "/Users/bytedance/.local/state/nvim/lazy/readme",
+        "/Users/bytedance/.local/share/nvim/lazy/cmp-path/after",
+        "/Users/bytedance/.local/share/nvim/lazy/cmp-buffer/after",
+        "/Users/bytedance/.local/share/nvim/lazy/cmp-cmdline/after",
+        "/Users/bytedance/.local/share/nvim/lazy/cmp-nvim-lsp/after",
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library"
+    ]
+}

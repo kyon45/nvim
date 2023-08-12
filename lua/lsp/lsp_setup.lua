@@ -21,10 +21,16 @@ require('mason-lspconfig').setup {
 -- setup nvim-lspconfig
 require('mason-lspconfig').setup_handlers {
   function (server)
-    opts = {
+    local opts = {
       on_attach = require('lsp.lsp_handlers').on_attach,
       capabilities = require('lsp.lsp_handlers').capabilities,
     }
+
+    local require_ok, conf_opts = pcall(require, 'lsp.settings.' .. server)
+    if require_ok then
+      opts = vim.tbl_deep_extend('force', conf_opts, opts)
+    end
+
     require('lspconfig')[server].setup(opts)
   end
 }
