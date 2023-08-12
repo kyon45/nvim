@@ -31,7 +31,7 @@ end
 
 -- handlers: `on_attach`
 local function lsp_keymaps(bufnr)
-  local otps = { noremap = true, silent = true }
+  local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
