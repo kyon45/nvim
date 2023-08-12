@@ -30,6 +30,7 @@ vim.cmd([[
   let &colorcolumn="80,120"
 ]]) -- https://stackoverflow.com/a/13731714
   -- let &colorcolumn="80,".join(range(120,999),",")
+vim.opt.signcolumn = 'yes'
 
 -- SEARCHING --
 vim.opt.showmatch = true
