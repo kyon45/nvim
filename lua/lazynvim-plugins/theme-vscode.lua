@@ -16,9 +16,10 @@ return {
         italic_comments = true,
         -- Disable nvim-tree background color
         disable_nvimtree_bg = true,
-        -- Ovverride colors (see ./lua/vscode/colors.lua)
-        -- color_overrides = {
-        -- }
+        -- Override colors (see ./lua/vscode/colors.lua)
+        color_overrides = {
+          vscCursorDarkDark = '#3A3A3A',
+        },
         -- Override highlight groups (see ./lua/vscode/theme.lua)
         group_overrides = {
           -- this supports the same val table as vim.api.nvim_set_hl

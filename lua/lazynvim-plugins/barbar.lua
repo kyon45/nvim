@@ -16,6 +16,11 @@ return {
       icons = {
         button = '×', -- the close icon
         -- separator = {left = '▎', right = ''},
+        gitsigns = {
+          added = {enabled = true, icon = '+'},
+          changed = {enabled = true, icon = '~'},
+          deleted = {enabled = true, icon = '-'},
+        },
       },
       -- Set the filetype which barbar will offset itself for
       sidebar_filetypes = {
