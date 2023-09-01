@@ -18,7 +18,6 @@ vim.opt.autoindent = true
 vim.opt.shiftwidth = 2            -- width for autoindents
 vim.cmd('filetype plugin indent on')
                                   -- allow auto-indenting depending on file type
-
 -- EDITOR APPEARENCE --
 vim.opt.number = true             -- show absolute line number
 vim.opt.relativenumber = true     -- show relative line number
@@ -38,4 +37,12 @@ vim.opt.incsearch = true          -- search as characters are entered
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true         -- ignore case in searches by default
 vim.opt.smartcase = true          -- but make it case-sensitive if an uppercase is entered
+
+-- CODE FOLDING --
+-- https://neovim.io/doc/user/fold.html#fold-commands
+-- https://github.com/nvim-treesitter/nvim-treesitter#folding
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldenable = false        -- disable folding at startup 
+vim.opt.foldlevel = 99
 
