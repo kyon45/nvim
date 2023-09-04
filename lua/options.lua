@@ -1,5 +1,5 @@
 -- LANGUAGE --
-vim.cmd('language en_US')
+vim.cmd('language en_US.UTF-8')
 -- or: vim.api.nvim_exec('language en_US', true)
 
 -- CLIPBOARD --
@@ -26,9 +26,10 @@ vim.opt.cursorline = true
 vim.opt.splitright = true         -- open new horizontal splits right
 vim.cmd([[
   hi ColorColumn ctermbg=250 guibg=#FFFFFF
-  let &colorcolumn="80,120"
+  let &colorcolumn="81,121"
 ]]) -- https://stackoverflow.com/a/13731714
   -- let &colorcolumn="80,".join(range(120,999),",")
+  -- NOTE: hi ColorColumn would be replaced by theme
 vim.opt.signcolumn = 'yes'
 
 -- SEARCHING --

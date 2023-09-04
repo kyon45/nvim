@@ -26,3 +26,19 @@
 
 Add `export LANG=en_US.UTF-8` to your shell profile
 
+## Cheatsheet
+
+### Get the full path of current buffer
+
+```
+:echo expand('%:p')
+```
+
+Here `%` represents the current buffer.
+
+If you want to insert the full path into the current buffer, use the following command:
+
+```
+:put =expand('%:p')
+```
+
