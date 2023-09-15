@@ -22,6 +22,11 @@ vim.keymap.set('n', '<C-Right>', ':vertical +2<CR>', opts)
 vim.keymap.set('v', '<', '<gv', opts)
 vim.keymap.set('v', '>', '>gv', opts)
 
+-- TERMINAL MODE ---------------------------------------------------------------
+-- Type <S-Space> but got ;2u issue
+-- https://github.com/vim/vim/issues/6040#issuecomment-827176487
+vim.keymap.set('t', '<S-Space>', '<Space>', opts)
+
 -- <LEADER> KEY ---------------------------------------------------------------
 vim.g.mapleader = " "
 
