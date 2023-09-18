@@ -15,6 +15,8 @@ return {
   },
   { 'williamboman/mason-lspconfig.nvim' },
   { 'RRethy/vim-illuminate' },
+  -- Language Tools
+  { 'simrat39/rust-tools.nvim' },
 }
 
 
