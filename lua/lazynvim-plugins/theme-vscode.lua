@@ -25,6 +25,7 @@ return {
           -- this supports the same val table as vim.api.nvim_set_hl
           -- use colors from this colorscheme by requiring vscode.colors!
           ColorColumn = { fg='NONE', bg='#454545' },
+          DiagnosticUnnecessary = { fg = 'NONE', bg = 'NONE', undercurl = true, sp = c.vscYellow },
         }
       })
       require('vscode').load()
