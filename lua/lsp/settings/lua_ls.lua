@@ -6,9 +6,9 @@ return {
       diagnostics = {
         -- Get the language server to recognize the `vim` global
         global = {
-          'vim',
-          'require'
-        }
+          "vim",
+          "require",
+        },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -19,6 +19,10 @@ return {
       telemetry = {
         enabled = false,
       },
-    }
-  }
+      -- Close default formatter, use `conform.nvim` instead
+      format = {
+        enabled = false,
+      },
+    },
+  },
 }
