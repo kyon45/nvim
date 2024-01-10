@@ -16,6 +16,12 @@ return {
   { 'williamboman/mason-lspconfig.nvim' },
   { 'RRethy/vim-illuminate' },
   -- Language Tools
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'neovim/nvim-lspconfig',
+    },
+  },
   { 'simrat39/rust-tools.nvim' },
 }
-
