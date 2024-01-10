@@ -17,9 +17,16 @@ return {
         button = '×', -- the close icon
         -- separator = {left = '▎', right = ''},
         gitsigns = {
-          added = {enabled = true, icon = '+'},
-          changed = {enabled = true, icon = '~'},
-          deleted = {enabled = true, icon = '-'},
+          added = { enabled = true, icon = '+' },
+          changed = { enabled = true, icon = '~' },
+          deleted = { enabled = true, icon = '-' },
+        },
+        -- Enables / disables diagnostic symbols
+        diagnostics = {
+          [vim.diagnostic.severity.ERROR] = { enabled = true },
+          [vim.diagnostic.severity.WARN] = { enabled = true },
+          [vim.diagnostic.severity.INFO] = { enabled = false },
+          [vim.diagnostic.severity.HINT] = { enabled = false },
         },
       },
       -- Set the filetype which barbar will offset itself for
@@ -33,4 +40,3 @@ return {
     version = '^1.0.0',
   },
 }
-

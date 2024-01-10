@@ -24,12 +24,18 @@ return {
         group_overrides = {
           -- this supports the same val table as vim.api.nvim_set_hl
           -- use colors from this colorscheme by requiring vscode.colors!
-          ColorColumn = { fg='NONE', bg='#454545' },
+          ColorColumn = { fg = 'NONE', bg = '#454545' },
           DiagnosticUnnecessary = { fg = 'NONE', bg = 'NONE', undercurl = true, sp = c.vscYellow },
-        }
+
+          DiffviewDiffAddAsDelete = { fg = 'NONE', bg = c.vscDiffRedLight }, -- bg = '#431313' },
+          DiffviewDiffDelete = { fg = c.vscLineNumber },
+          DiffAdd = { fg = 'NONE', bg = c.vscDiffGreenDark },
+          DiffAddAsDelete = { fg = 'NONE', bg = c.vscDiffRedDark },
+          DiffAddText = { fg = 'NONE', bg = c.vscDiffGreenLight },
+          DiffDeleteText = { fg = 'NONE', bg = c.vscDiffRedLight },
+        },
       })
       require('vscode').load()
-    end
-  }
+    end,
+  },
 }
-
