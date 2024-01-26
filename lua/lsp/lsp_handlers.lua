@@ -1,3 +1,4 @@
+-- @deprecated
 local Module = {}
 
 local cmp_status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')

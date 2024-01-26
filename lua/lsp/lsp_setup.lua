@@ -27,8 +27,8 @@ require('mason-lspconfig').setup_handlers({
     end
 
     local opts = {
-      on_attach = require('lsp.lsp_handlers').on_attach,
-      capabilities = require('lsp.lsp_handlers').capabilities,
+      -- on_attach = require('lsp.lsp_handlers').on_attach,
+      -- capabilities = require('lsp.lsp_handlers').capabilities,
     }
 
     local require_ok, conf_opts = pcall(require, 'lsp.settings.' .. server)
@@ -40,13 +40,10 @@ require('mason-lspconfig').setup_handlers({
   end,
 })
 
-require('lsp.lsp_handlers').setup()
-
 -- setup typescript-tools
 local ts_tools = require('typescript-tools')
 local ts_tools_api = require('typescript-tools.api')
 ts_tools.setup({
-  on_attach = require('lsp.lsp_handlers').on_attach,
   -- `handlers` can be used to override certain LSP methods.
   handlers = {
     ['textDocument/publishDiagnostics'] = ts_tools_api.filter_diagnostics({ 6133 }),
@@ -63,8 +60,6 @@ rt.setup({
   -- these override the defaults set by rust-tools.nvim
   -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
   server = {
-    capabilities = require('lsp.lsp_handlers').capabilities,
-    on_attach = require('lsp.lsp_handlers').on_attach,
     -- on_attach = function(_, bufnr)
     --   -- Hover actions
     --   vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })

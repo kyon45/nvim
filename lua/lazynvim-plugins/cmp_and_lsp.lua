@@ -15,6 +15,7 @@ return {
   },
   { 'williamboman/mason-lspconfig.nvim' },
   { 'RRethy/vim-illuminate' },
+  { 'nvimdev/lspsaga.nvim' },
   -- Language Tools
   {
     'pmizio/typescript-tools.nvim',
