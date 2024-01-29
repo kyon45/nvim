@@ -8,7 +8,7 @@ local servers = {
   -- Web Dev
   'html',
   'cssls',
-  -- 'tsserver', -- replaced by `typescript-tools.nvim`
+  'tsserver', -- required by `typescript-tools.nvim`
   'jsonls',
   -- Other
   'rust_analyzer', -- Cargo conventions: https://doc.rust-lang.org/cargo/guide/project-layout.html

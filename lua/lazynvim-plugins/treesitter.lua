@@ -3,6 +3,7 @@
 local ensure_installed = {
   'lua',
   -- Front End
+  'jsdoc',
   'javascript',
   'typescript',
   'tsx',
