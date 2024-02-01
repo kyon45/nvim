@@ -16,7 +16,6 @@ local ensure_installed = {
   'rust',
   'bash',
   'markdown',
-  'markdown_inline', -- required by `lspsaga`
 }
 
 return {
@@ -25,10 +24,10 @@ return {
     -- TODO: JoosepAlviste/nvim-ts-context-commentstring
     build = ':TSUpdate',
     config = function()
-      local configs = require('nvim-treesitter.configs')
+      local configs = require("nvim-treesitter.configs")
       configs.setup({
         ensure_installed = ensure_installed,
-        ignore_installed = { '' },
+        ignore_installed = { "" },
         sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
 
         highlight = {
@@ -41,7 +40,9 @@ return {
         indent = {
           enable = true,
         },
+
       })
-    end,
-  },
+    end
+  }
 }
+
