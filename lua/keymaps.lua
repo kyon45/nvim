@@ -28,5 +28,4 @@ vim.keymap.set('v', '>', '>gv', opts)
 vim.keymap.set('t', '<S-Space>', '<Space>', opts)
 
 -- <LEADER> KEY ---------------------------------------------------------------
-vim.g.mapleader = " "
-
+vim.g.mapleader = ','
