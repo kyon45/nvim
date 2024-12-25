@@ -1,9 +1,9 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.2',
+    tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function ()
+    config = function()
       require('telescope').setup({})
 
       local opt = {
@@ -17,7 +17,7 @@ return {
       vim.keymap.set('n', '<leader>fk', '<cmd>Telescope keymaps<CR>', opt)
 
       local builtin = require('telescope.builtin')
-      local live_grep_raw = function ()
+      local live_grep_raw = function()
         builtin.live_grep({
           additional_args = {
             -- https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#common-options
