@@ -11,8 +11,6 @@ return {
         silent = true,
       }
       vim.keymap.set('n', '<leader>bb', '<cmd>NvimTreeToggle<CR>', opt)
-      vim.keymap.set('n', '<leader>bc', '<cmd>BufferClose<CR>', opt)
-      vim.keymap.set('n', '<leader>bt', '<cmd>BufferCloseAllButCurrent<CR>', opt)
     end,
   },
 }
