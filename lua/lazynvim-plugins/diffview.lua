@@ -35,7 +35,7 @@ return {
         silent = true,
       }
 
-      vim.keymap.set('n', '<leader>do', ':NvimTreeClose <BAR> :DiffviewOpen<CR>', opts)
+      vim.keymap.set('n', '<leader>do', ':DiffviewOpen<CR>', opts)
       vim.keymap.set('n', '<leader>dc', ':DiffviewClose<CR>', opts)
 
       -- https://github.com/sindrets/diffview.nvim/issues/35
