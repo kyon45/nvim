@@ -2,7 +2,9 @@ return {
   {
     'sindrets/diffview.nvim',
     config = function()
-      require('diffview').setup({
+      ---@type DiffviewConfig
+      ---@diagnostic disable-next-line:missing-fields
+      local diffview_config = {
         use_icons = true, -- Requires nvim-web-devicons
         hooks = {
           -- @README https://github.com/sindrets/diffview.nvim/pull/258#issuecomment-1332166876
@@ -28,7 +30,14 @@ return {
             end
           end,
         },
-      })
+        view = {
+          merge_tool = {
+            -- Config for conflicted files in diff views during a merge or rebase.
+            layout = 'diff1_plain',
+          },
+        },
+      }
+      require('diffview').setup(diffview_config)
 
       local opts = {
         noremap = true,
