@@ -30,12 +30,19 @@ return {
   {
     'folke/lazydev.nvim',
     ft = 'lua',
+    dependencies = {
+      -- https://www.reddit.com/r/neovim/comments/1g0tn6t/lazydev_and_wezterm_types
+      { 'gonstoll/wezterm-types', lazy = true },
+    },
     cmd = 'LazyDev',
     opts = {
       library = {
-        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-        -- { path = 'snacks.nvim', words = { 'Snacks' } },
         'lazy.nvim',
+        -- 3rd
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        { path = 'snacks.nvim', words = { 'Snacks' } },
+        { path = 'yazi.nvim', words = { 'YaziConfig' } },
+        { path = 'wezterm-types', mods = { 'wezterm' } },
       },
     },
   },
