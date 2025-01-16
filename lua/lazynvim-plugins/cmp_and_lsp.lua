@@ -12,6 +12,9 @@ return {
   {
     'williamboman/mason.nvim',
     build = ':MasonUpdate', -- update registry contents
+    dependencies = {
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+    },
   },
   { 'williamboman/mason-lspconfig.nvim' },
   { 'RRethy/vim-illuminate' },

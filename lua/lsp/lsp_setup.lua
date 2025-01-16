@@ -19,6 +19,19 @@ require('mason').setup()
 require('mason-lspconfig').setup({
   ensure_installed = servers,
 })
+require('mason-tool-installer').setup({
+  ensure_installed = {
+    -- Linter
+    {
+      'eslint_d',
+      -- see formatter_and_linter.lua for more details
+      version = '13.1.2',
+    },
+    -- Formatter
+    'prettier',
+    'stylua',
+  },
+})
 
 -- setup nvim-lspconfig
 require('mason-lspconfig').setup_handlers({
