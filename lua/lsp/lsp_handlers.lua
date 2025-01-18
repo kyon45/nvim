@@ -50,18 +50,20 @@ end
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
+  -- Pickers
+  keymap(bufnr, 'n', 'gd', '<cmd>lua Snacks.picker.lsp_definitions()<CR>', opts)
+  keymap(bufnr, 'n', 'gI', '<cmd>lua Snacks.picker.lsp_implementations()<CR>', opts)
+  keymap(bufnr, 'n', 'gr', '<cmd>lua Snacks.picker.lsp_references()<CR>', opts)
+  keymap(bufnr, 'n', 'gs', '<cmd>lua Snacks.picker.lsp_symbols()<CR>', opts)
+
   keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
   keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  keymap(bufnr, 'n', 'gI', '<cmd>Telescope lsp_implementations<CR>', opts)
-  keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
   keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   keymap(bufnr, 'n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
   -- TODO --
   keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.format{ async = true }<cr>', opts)
   keymap(bufnr, 'n', '<leader>li', '<cmd>LspInfo<cr>', opts)
-  keymap(bufnr, 'n', '<leader>lI', '<cmd>LspInstallInfo<cr>', opts)
   keymap(bufnr, 'n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
   keymap(bufnr, 'n', '<leader>lj', '<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>', opts)
   keymap(bufnr, 'n', '<leader>lk', '<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>', opts)
