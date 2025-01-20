@@ -22,6 +22,7 @@ Module.setup = function()
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
   end
 
+  ---@type vim.diagnostic.Opts
   local config = {
     virtual_text = false, -- disable inline virtual text
     signs = {
@@ -30,7 +31,9 @@ Module.setup = function()
     update_in_insert = true,
     underline = true,
     severity_sort = true,
-    -- float = {},
+    float = {
+      border = 'rounded',
+    },
   }
   vim.diagnostic.config(config)
 

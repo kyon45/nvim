@@ -26,6 +26,9 @@ return {
           -- use colors from this colorscheme by requiring vscode.colors!
           ColorColumn = { fg = 'NONE', bg = '#454545' },
           DiagnosticUnnecessary = { fg = 'NONE', bg = 'NONE', undercurl = true, sp = c.vscYellow },
+          DiagnosticDeprecated = { strikethrough = true },
+          --- https://github.com/folke/snacks.nvim/blob/v2.13.0/lua/snacks/dim.lua#L43-L45
+          SnacksDim = { fg = c.vscGray },
 
           DiffviewDiffAddAsDelete = { fg = 'NONE', bg = c.vscDiffRedLight }, -- bg = '#431313' },
           DiffviewDiffDelete = { fg = c.vscLineNumber },
