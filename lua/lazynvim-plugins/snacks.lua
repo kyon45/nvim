@@ -23,6 +23,11 @@ return {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
       bigfile = { enabled = true },
+      dim = {
+        animate = {
+          enabled = false,
+        },
+      },
       indent = {
         enabled = true,
         animate = {
@@ -63,6 +68,8 @@ return {
     },
     -- stylua: ignore
     keys = {
+      -- dim
+      { "<leader>dim",  function() Snacks.toggle.dim():toggle() end, desc = "Toggle Dim" },
       -- notifier
       { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
       { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
@@ -72,6 +79,7 @@ return {
       { "<leader>fgr", function () Snacks.picker('grep_raw') end, desc = "[Picker] Live Grep Raw" },
       { "<leader>fb", function () Snacks.picker.buffers() end, desc = "[Picker] Buffers" },
       { "<leader>fk", function () Snacks.picker.keymaps() end, desc = "[Picker] Keymaps" },
+      { "<leader>fp", function () Snacks.picker.pickers() end, desc = "[Picker] Pickers" },
       -- words
       { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
       { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
