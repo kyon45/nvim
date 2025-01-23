@@ -8,8 +8,7 @@ local servers = {
   -- Web Dev
   'html',
   'cssls',
-  -- 'tsserver', -- required by `typescript-tools.nvim`
-  'ts_ls',
+  'ts_ls', -- required by `typescript-tools.nvim`
   'jsonls',
   -- Other
   'rust_analyzer', -- Cargo conventions: https://doc.rust-lang.org/cargo/guide/project-layout.html
@@ -36,7 +35,7 @@ require('mason-tool-installer').setup({
 -- setup nvim-lspconfig
 require('mason-lspconfig').setup_handlers({
   function(server)
-    if server == 'rust_analyzer' or server == 'tsserver' then
+    if server == 'rust_analyzer' or server == 'ts_ls' then
       return
     end
 
