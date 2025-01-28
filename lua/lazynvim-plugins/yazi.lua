@@ -40,6 +40,7 @@ return {
       -- buffer
       vim.keymap.set('n', '<leader>bc', '<cmd>BufferClose<CR>', opts)
       vim.keymap.set('n', '<leader>bt', '<cmd>BufferCloseAllButCurrent<CR>', opts)
+      vim.keymap.set('n', '<leader>br', '<cmd>BufferCloseBuffersRight<CR>', opts)
       vim.keymap.set('n', '<leader>bh', '<cmd>BufferPrevious<CR>', opts)
       vim.keymap.set('n', '<leader>bl', '<cmd>BufferNext<CR>', opts)
     end,

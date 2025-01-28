@@ -7,14 +7,6 @@ return {
     },
     init = function()
       vim.g.barbar_auto_setup = false
-
-      -- Keymap
-      local opt = {
-        noremap = true,
-        silent = true,
-      }
-      vim.keymap.set('n', '<leader>bc', '<cmd>BufferClose<CR>', opt)
-      vim.keymap.set('n', '<leader>bt', '<cmd>BufferCloseAllButCurrent<CR>', opt)
     end,
     opts = { -- lazy.nvim will automatically call `setup` for you
       icons = {
