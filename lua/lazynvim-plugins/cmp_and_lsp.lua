@@ -26,7 +26,11 @@ return {
       'neovim/nvim-lspconfig',
     },
   },
-  { 'simrat39/rust-tools.nvim' },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
   {
     'folke/lazydev.nvim',
     ft = 'lua',
@@ -42,6 +46,7 @@ return {
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
         { path = 'snacks.nvim', words = { 'Snacks' } },
         { path = 'yazi.nvim', words = { 'YaziConfig' } },
+        { path = 'rustaceanvim', words = { 'rustaceanvim' } },
         { path = 'wezterm-types', mods = { 'wezterm' } },
       },
     },

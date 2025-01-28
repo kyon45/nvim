@@ -69,24 +69,36 @@ ts_tools.setup({
   },
 })
 
--- setup rust-tools
-local rt = require('rust-tools')
-rt.setup({
-  -- all the opts to send to nvim-lspconfig
-  -- these override the defaults set by rust-tools.nvim
-  -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
-  server = {
-    capabilities = require('lsp.lsp_handlers').capabilities,
-    on_attach = require('lsp.lsp_handlers').on_attach,
-    -- on_attach = function(_, bufnr)
-    --   -- Hover actions
-    --   vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-    --   -- Code action groups
-    --   vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-    -- end,
-
-    -- standalone file support
-    -- setting it to false may improve startup time
-    -- standalone = true,
+-- setup rustaceanvim
+---@type rustaceanvim.Opts
+vim.g.rustaceanvim = {
+  tools = {
+    float_win_config = {
+      border = 'rounded',
+    },
   },
-})
+  server = {
+    on_attach = function(client, bufnr)
+      require('lsp.lsp_handlers').on_attach(client, bufnr, {
+        maps = {
+          ['n'] = {
+            ['K'] = {
+              -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+              function()
+                vim.cmd.RustLsp({ 'hover', 'actions' })
+              end,
+              desc = '[Rust] LSP Hover',
+            },
+            ['<leader>ca'] = {
+              -- supports rust-analyzer's grouping
+              function()
+                vim.cmd.RustLsp('codeAction')
+              end,
+              desc = '[Rust] LSP Code Action',
+            },
+          },
+        },
+      })
+    end,
+  },
+}

@@ -66,7 +66,7 @@ return {
         },
       },
     },
-    -- stylua: ignore
+    -- stylua: ignore start
     keys = {
       -- dim
       { "<leader>dim",  function() Snacks.toggle.dim():toggle() end, desc = "Toggle Dim" },
@@ -84,5 +84,6 @@ return {
       { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
       { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
     },
+    -- stylua: ignore end
   },
 }

@@ -46,32 +46,83 @@ Module.setup = function()
   })
 end
 
--- handlers: `on_attach`
-local function lsp_keymaps(bufnr)
-  local opts = { noremap = true, silent = true }
-  local keymap = vim.api.nvim_buf_set_keymap
-  -- Pickers
-  keymap(bufnr, 'n', 'gd', '<cmd>lua Snacks.picker.lsp_definitions()<CR>', opts)
-  keymap(bufnr, 'n', 'gI', '<cmd>lua Snacks.picker.lsp_implementations()<CR>', opts)
-  keymap(bufnr, 'n', 'gr', '<cmd>lua Snacks.picker.lsp_references()<CR>', opts)
-  keymap(bufnr, 'n', 'gs', '<cmd>lua Snacks.picker.lsp_symbols()<CR>', opts)
+---@class lsp_handlers.KeymapCmd
+---@field [1] string | function
+---@field desc? string
 
-  keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  keymap(bufnr, 'n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  keymap(bufnr, 'n', '<leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-  -- TODO --
-  keymap(bufnr, 'n', '<leader>lf', '<cmd>lua vim.lsp.buf.format{ async = true }<cr>', opts)
-  keymap(bufnr, 'n', '<leader>li', '<cmd>LspInfo<cr>', opts)
-  keymap(bufnr, 'n', '<leader>la', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-  keymap(bufnr, 'n', '<leader>lj', '<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>', opts)
-  keymap(bufnr, 'n', '<leader>lk', '<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>', opts)
-  keymap(bufnr, 'n', '<leader>ls', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  keymap(bufnr, 'n', '<leader>lq', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+---@alias lsp_handlers.KeymapTable table<string, table<string, string | function | lsp_handlers.KeymapCmd>>
+
+--- handlers: `on_attach`
+---@param bufnr integer
+---@param maps? lsp_handlers.KeymapTable
+local function lsp_keymaps(bufnr, maps)
+  maps = maps or {}
+
+  ---https://neovim.io/doc/user/lua.html#vim.keymap.set()
+  ---Table of `:map-arguments`. Same as `nvim_set_keymap() {opts}`
+  ---@class KeymapOpts: vim.api.keyset.keymap
+  ---@field buffer integer | boolean Creates buffer-local mapping, `0` or `true` for current buffer.
+
+  ---@type KeymapOpts
+  local opts = { noremap = true, silent = true, buffer = bufnr }
+  ---https://neovim.io/doc/user/lua.html#vim.keymap.set()
+  ---@type fun(mode: string | string[], lhs: string, rhs: string | function, opts?: KeymapOpts)
+  local keymap = vim.keymap.set
+
+  ---@type lsp_handlers.KeymapTable
+  local default_maps = {
+    -- stylua: ignore start
+    ['n'] = {
+      -- Pickers
+      ['gd']         = { function() Snacks.picker.lsp_definitions() end, desc = 'LSP Definitions' },
+      ['gI']         = { function() Snacks.picker.lsp_implementations() end, desc = 'LSP Implementations' },
+      ['gr']         = { function() Snacks.picker.lsp_references() end, desc = 'LSP References' },
+      ['gs']         = { function() Snacks.picker.lsp_symbols() end, desc = 'LSP Symbols' },
+      ['gD']         = { function() vim.lsp.buf.declaration() end, desc = 'LSP Declaration' },
+      ['K']          = { function() vim.lsp.buf.hover() end, desc = 'LSP Hover' },
+      ['gl']         = { function() vim.diagnostic.open_float() end, desc = 'Diagnostic Float' },
+      ['<leader>ca'] = { function() vim.lsp.buf.code_action() end, desc = 'LSP Code Action' },
+      ['<leader>r']  = { function() vim.lsp.buf.rename() end, desc = 'LSP Rename' },
+      ['<leader>li'] = { function() vim.cmd('LspInfo') end, desc = 'LSP Info' },
+      -- TODO
+      ['<leader>lf'] = { function() vim.lsp.buf.format({ async = true }) end, desc = 'LSP Format' },
+      ['<leader>lj'] = { function() vim.diagnostic.goto_next({ buffer = 0 }) end, desc = 'Next Diagnostic' },
+      ['<leader>lk'] = { function() vim.diagnostic.goto_prev({ buffer = 0 }) end, desc = 'Previous Diagnostic' },
+      ['<leader>lq'] = { function() vim.diagnostic.setloclist() end, desc = 'Set Diagnostic Loclist' },
+      ['<leader>ls'] = { function() vim.lsp.buf.signature_help() end, desc = 'LSP Signature Help' },
+    },
+    -- stylua: ignore end
+  }
+  ---@type lsp_handlers.KeymapTable
+  local keymaps_tbl = vim.tbl_deep_extend('force', default_maps, maps)
+  for mode, map_maps in pairs(keymaps_tbl) do
+    for keybind, cmd in pairs(map_maps) do
+      local _opts = opts
+      ---@type string | function
+      local _cmd = ''
+
+      local typeof_cmd = type(cmd)
+      if typeof_cmd == 'string' or typeof_cmd == 'function' then
+        _cmd = cmd
+      else
+        _opts = vim.tbl_deep_extend('force', opts, { desc = cmd.desc })
+        _cmd = cmd[1]
+      end
+
+      keymap(mode, keybind, _cmd, _opts)
+    end
+  end
 end
 
-Module.on_attach = function(client, bufnr)
+---@class lsp_handlers.OnAttachOpt
+---@field maps? lsp_handlers.KeymapTable
+
+---@param client any
+---@param bufnr integer
+---@param opts? lsp_handlers.OnAttachOpt
+Module.on_attach = function(client, bufnr, opts)
+  opts = opts or {}
+
   if client.name == 'tsserver' then
     client.server_capabilities.documentFormattingProvider = false
   end
@@ -80,7 +131,7 @@ Module.on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
   end
 
-  lsp_keymaps(bufnr)
+  lsp_keymaps(bufnr, opts.maps)
   local status_ok, illuminate = pcall(require, 'illuminate')
   if not status_ok then
     return
