@@ -39,6 +39,11 @@ return {
       ---@type snacks.picker.Config
       picker = {
         sources = {
+          ---@type snacks.picker.files.Config
+          ---@diagnostic disable-next-line:missing-fields
+          ['files'] = {
+            hidden = true,
+          },
           ---@type snacks.picker.grep.Config
           ['grep_raw'] = {
             finder = 'grep',
