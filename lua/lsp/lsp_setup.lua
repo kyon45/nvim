@@ -60,6 +60,7 @@ local ts_tools = require('typescript-tools')
 local ts_tools_api = require('typescript-tools.api')
 ts_tools.setup({
   on_attach = require('lsp.lsp_handlers').on_attach,
+  capabilities = require('lsp.lsp_handlers').capabilities,
   -- `handlers` can be used to override certain LSP methods.
   handlers = {
     ['textDocument/publishDiagnostics'] = ts_tools_api.filter_diagnostics({ 6133 }),
@@ -100,5 +101,6 @@ vim.g.rustaceanvim = {
         },
       })
     end,
+    capabilities = require('lsp.lsp_handlers').capabilities,
   },
 }

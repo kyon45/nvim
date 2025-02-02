@@ -7,6 +7,10 @@ end
 
 Module.capabilities = vim.lsp.protocol.make_client_capabilities()
 Module.capabilities.textDocument.completion.completionItem.snippetSupport = true
+Module.capabilities.textDocument.foldingRange = { -- nvim-ufo
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
 Module.capabilities = cmp_nvim_lsp.default_capabilities(Module.capabilities)
 
 -- setup

@@ -1,3 +1,4 @@
+-- stylua: ignore start
 -- LANGUAGE --
 vim.cmd('language en_US.UTF-8')
 -- or: vim.api.nvim_exec('language en_US', true)
@@ -40,10 +41,4 @@ vim.opt.ignorecase = true         -- ignore case in searches by default
 vim.opt.smartcase = true          -- but make it case-sensitive if an uppercase is entered
 
 -- CODE FOLDING --
--- https://neovim.io/doc/user/fold.html#fold-commands
--- https://github.com/nvim-treesitter/nvim-treesitter#folding
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-vim.opt.foldenable = false        -- disable folding at startup 
-vim.opt.foldlevel = 99
-
+--- see nvim-ufo.lua
