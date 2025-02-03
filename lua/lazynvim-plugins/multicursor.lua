@@ -2,6 +2,7 @@ return {
   ---@type LazySpec
   {
     'jake-stewart/multicursor.nvim',
+    event = 'VeryLazy',
     branch = '1.0',
     config = function()
       local mc = require('multicursor-nvim')
@@ -73,6 +74,10 @@ return {
         else
           -- Default <esc> handler.
         end
+      end)
+
+      set('v', '<esc>', function()
+        vim.notify('[multicursor.nvim] Use <CTRL-C> to exit visual mode')
       end)
 
       -- -- bring back cursors if you accidentally clear them
