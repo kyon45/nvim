@@ -44,13 +44,17 @@ return {
           ['files'] = {
             hidden = true,
           },
+
+          --- Customize Pickers ---
           ---@type snacks.picker.grep.Config
           ['grep_raw'] = {
             finder = 'grep',
             format = 'file',
+            show_empty = true,
             live = true,
             supports_live = true,
             regex = false,
+            layout = 'left',
             -- see: https://github.com/folke/snacks.nvim/issues/620
             -- By default, `title` will be mapped to "Grep Raw" from `source` "grep_raw".
             -- You can change it by customize this `title` field
@@ -84,6 +88,7 @@ return {
       { "<leader>fgr", function () Snacks.picker('grep_raw') end, desc = "[Picker] Live Grep Raw" },
       { "<leader>fb", function () Snacks.picker.buffers() end, desc = "[Picker] Buffers" },
       { "<leader>fk", function () Snacks.picker.keymaps() end, desc = "[Picker] Keymaps" },
+      { "<leader>fl", function () Snacks.picker.lines() end, desc = "[Picker] Lines" },
       { "<leader>fp", function () Snacks.picker.pickers() end, desc = "[Picker] Pickers" },
       -- words
       { "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
