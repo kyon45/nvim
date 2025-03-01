@@ -44,25 +44,36 @@ return {
       set.fillchars = set.fillchars + 'diff:╱'
 
       -- user commands
+      local function trim(s)
+        return s:match('^%s*(.-)%s*$')
+      end
       vim.api.nvim_create_user_command('DiffviewPrompt', function()
         vim.ui.input({ prompt = 'Diffview' }, function(git_rev)
           if not git_rev or type(git_rev) ~= 'string' then
             return
           end
 
-          local args = git_rev
-          --- TODO: use "diffview.arg_parser" instead
-          if not string.find(git_rev, '%.%.') then
-            args = git_rev .. '^!'
+          git_rev = trim(git_rev)
+          local cmd = ''
+          if git_rev == '' then
+            cmd = 'DiffviewFileHistory %'
+          else
+            local args = git_rev
+            --- TODO: use "diffview.arg_parser" instead
+            if not string.find(git_rev, '%.%.') then
+              args = git_rev .. '^!'
+            end
+
+            cmd = 'DiffviewOpen ' .. args
           end
 
-          vim.cmd('DiffviewOpen ' .. args)
+          vim.cmd(cmd)
+          vim.notify(':' .. cmd)
         end)
       end, {
         nargs = 0,
-        desc = 'DiffviewOpen <git-rev>^!',
+        desc = 'DiffviewOpen with prompt',
       })
-      --- TODO: DiffviewFileHistory %
 
       -- keymaps
       local opts = {
