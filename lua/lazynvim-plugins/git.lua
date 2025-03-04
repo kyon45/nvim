@@ -36,6 +36,11 @@ return {
             layout = 'diff1_plain',
           },
         },
+        file_history_panel = {
+          win_config = {
+            height = 32,
+          },
+        },
       }
       require('diffview').setup(diffview_config)
 
@@ -56,7 +61,8 @@ return {
           git_rev = trim(git_rev)
           local cmd = ''
           if git_rev == '' then
-            cmd = 'DiffviewFileHistory %'
+            -- vscode-like file history
+            cmd = 'DiffviewFileHistory --cherry-pick --no-merges %'
           else
             local args = git_rev
             --- TODO: use "diffview.arg_parser" instead
