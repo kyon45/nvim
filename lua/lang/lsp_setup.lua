@@ -1,37 +1,3 @@
--- https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/lsp/mason.lua
-
--- # Mason
-local servers = {
-  -- Scripts
-  'lua_ls', -- Lua
-  'bashls',
-  -- Web Dev
-  'html',
-  'cssls',
-  'ts_ls', -- required by `typescript-tools.nvim`
-  'jsonls',
-  -- Other
-  'rust_analyzer', -- Cargo conventions: https://doc.rust-lang.org/cargo/guide/project-layout.html
-}
-
-require('mason').setup()
-require('mason-lspconfig').setup({
-  ensure_installed = servers,
-})
-require('mason-tool-installer').setup({
-  ensure_installed = {
-    -- Linter
-    {
-      'eslint_d',
-      -- see formatter_and_linter.lua for more details
-      version = '13.1.2',
-    },
-    -- Formatter
-    'prettier',
-    'stylua',
-  },
-})
-
 -- setup nvim-lspconfig
 require('mason-lspconfig').setup_handlers({
   function(server)
@@ -40,11 +6,11 @@ require('mason-lspconfig').setup_handlers({
     end
 
     local opts = {
-      on_attach = require('lsp.lsp_handlers').on_attach,
-      capabilities = require('lsp.lsp_handlers').capabilities,
+      on_attach = require('lang.lsp_handlers').on_attach,
+      capabilities = require('lang.lsp_handlers').capabilities,
     }
 
-    local require_ok, conf_opts = pcall(require, 'lsp.settings.' .. server)
+    local require_ok, conf_opts = pcall(require, 'lang.settings.' .. server)
     if require_ok then
       opts = vim.tbl_deep_extend('force', conf_opts, opts)
     end
@@ -53,14 +19,15 @@ require('mason-lspconfig').setup_handlers({
   end,
 })
 
-require('lsp.lsp_handlers').setup()
+require('lang.lsp_handlers').setup()
 
+-- TODO: move to lang.settings
 -- setup typescript-tools
 local ts_tools = require('typescript-tools')
 local ts_tools_api = require('typescript-tools.api')
 ts_tools.setup({
-  on_attach = require('lsp.lsp_handlers').on_attach,
-  capabilities = require('lsp.lsp_handlers').capabilities,
+  on_attach = require('lang.lsp_handlers').on_attach,
+  capabilities = require('lang.lsp_handlers').capabilities,
   -- `handlers` can be used to override certain LSP methods.
   handlers = {
     ['textDocument/publishDiagnostics'] = ts_tools_api.filter_diagnostics({ 6133 }),
@@ -80,7 +47,7 @@ vim.g.rustaceanvim = {
   },
   server = {
     on_attach = function(client, bufnr)
-      require('lsp.lsp_handlers').on_attach(client, bufnr, {
+      require('lang.lsp_handlers').on_attach(client, bufnr, {
         maps = {
           ['n'] = {
             ['K'] = {
@@ -101,6 +68,6 @@ vim.g.rustaceanvim = {
         },
       })
     end,
-    capabilities = require('lsp.lsp_handlers').capabilities,
+    capabilities = require('lang.lsp_handlers').capabilities,
   },
 }

@@ -16,21 +16,17 @@ Module.capabilities = cmp_nvim_lsp.default_capabilities(Module.capabilities)
 -- setup
 Module.setup = function()
   -- diagnostic settings
-  local signs = {
-    { name = 'DiagnosticSignError', text = '' },
-    { name = 'DiagnosticSignWarn', text = '' },
-    { name = 'DiagnosticSignHint', text = '' },
-    { name = 'DiagnosticSignInfo', text = '' },
-  }
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = '' })
-  end
-
   ---@type vim.diagnostic.Opts
   local config = {
     virtual_text = false, -- disable inline virtual text
     signs = {
-      active = signs, -- show signs
+      ---neovim 0.11.0+
+      text = {
+        [vim.diagnostic.severity.ERROR] = '',
+        [vim.diagnostic.severity.WARN] = '',
+        [vim.diagnostic.severity.INFO] = '',
+        [vim.diagnostic.severity.HINT] = '',
+      },
     },
     update_in_insert = true,
     underline = true,
@@ -41,13 +37,20 @@ Module.setup = function()
   }
   vim.diagnostic.config(config)
 
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = 'rounded',
-  })
+  -- neovim 0.11.0+
+  local _hover = vim.lsp.buf.hover
+  vim.lsp.buf.hover = function(opts)
+    opts = opts or {}
+    opts.border = opts.border or 'rounded'
+    return _hover(opts)
+  end
 
-  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = 'rounded',
-  })
+  local _signature_help = vim.lsp.buf.signature_help
+  vim.lsp.buf.signature_help = function(opts)
+    opts = opts or {}
+    opts.border = opts.border or 'rounded'
+    return _signature_help(opts)
+  end
 end
 
 ---@class lsp_handlers.KeymapCmd
