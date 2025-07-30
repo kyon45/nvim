@@ -30,6 +30,12 @@ return {
         ---@param bufnr integer | nil
         ---@diagnostic disable-next-line
         local fmt_opt_fn = function(bufnr)
+          -- [feat: Command to disable formatting #192](https://github.com/stevearc/conform.nvim/issues/192)
+          if vim.g.disable_autoformat or (bufnr and vim.b[bufnr].disable_autoformat) then
+            return -- nil, to prevent auto_format
+            ---FIXME: manaully format is not affected
+          end
+
           ---@type conform.FormatOpts
           local fmt_opt = {
             bufnr = bufnr,
@@ -91,6 +97,75 @@ return {
           lua = { 'stylua' }, -- https://github.com/JohnnyMorganz/StyLua, stylua.toml
         },
         format_on_save = fmt_opt_fn_on_save,
+      })
+
+      -- regiter user_command
+      ---@param cmd 'toggle' | 'disable' | 'enable'
+      ---@param scope 'b' | 'g'
+      local perform_autoformat_cmd = function(cmd, scope)
+        --perform update
+        local origin_disable_autoformat = false
+        local disable_autoformat = false
+        if scope == 'g' then
+          origin_disable_autoformat = vim.g.disable_autoformat
+          if cmd == 'toggle' then
+            vim.g.disable_autoformat = not origin_disable_autoformat
+          elseif cmd == 'disable' then
+            vim.g.disable_autoformat = true
+          else
+            vim.g.disable_autoformat = false
+          end
+          disable_autoformat = vim.g.disable_autoformat
+        else
+          origin_disable_autoformat = vim.b.disable_autoformat
+          if cmd == 'toggle' then
+            vim.b.disable_autoformat = not origin_disable_autoformat
+          elseif cmd == 'disable' then
+            vim.b.disable_autoformat = true
+          else
+            vim.b.disable_autoformat = false
+          end
+          disable_autoformat = vim.b.disable_autoformat
+        end
+
+        --notify
+        local tag_onoff = 'on'
+        if disable_autoformat then
+          tag_onoff = 'off'
+        end
+
+        vim.notify('[AutoFormat] ' .. cmd .. ' :<' .. scope .. '>' .. tag_onoff)
+      end
+
+      vim.api.nvim_create_user_command('AutoFormatToggle', function(args)
+        if args.bang then
+          perform_autoformat_cmd('toggle', 'g')
+        else
+          perform_autoformat_cmd('toggle', 'b')
+        end
+      end, {
+        desc = 'Toggle autoformat-on-save',
+        bang = true, -- allows the ! variant
+      })
+
+      vim.api.nvim_create_user_command('AutoFormatDisable', function(args)
+        if args.bang then
+          -- :AutoFormatDisable! disables autoformat for this buffer only
+          perform_autoformat_cmd('disable', 'g')
+        else
+          -- :AutoFormatDisable disables auto-format globally
+          perform_autoformat_cmd('disable', 'b')
+        end
+      end, {
+        desc = 'Disable autoformat-on-save',
+        bang = true, -- allows the ! variant
+      })
+
+      vim.api.nvim_create_user_command('AutoFormatEnable', function()
+        perform_autoformat_cmd('enable', 'g')
+        perform_autoformat_cmd('enable', 'b')
+      end, {
+        desc = 'Re-enable autoformat-on-save',
       })
 
       -- keymap "MakePretty"
